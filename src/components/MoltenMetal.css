@@ -1,0 +1,5 @@
+.molten-metal-container { position: relative; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.molten-metal-container canvas { display: block; width: 100%; height: 100%; }
+.work-section { position: relative; isolation: isolate; }
+.section-molten-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; contain: paint; }
+.section-molten-field { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .7; mask-image: linear-gradient(180deg, transparent, #000 18%, #000 80%, transparent); }

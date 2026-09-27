@@ -1,0 +1,35 @@
+.animated-gradient-text {
+  position: relative;
+  display: flex;
+  max-width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.25rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.animated-gradient-text.with-border { padding: .35rem .75rem; }
+.gradient-overlay { position: absolute; inset: 0; border-radius: inherit; z-index: 0; pointer-events: none; }
+.gradient-overlay::before { content: ''; position: absolute; inset: 1px; border-radius: inherit; background: #120f17; z-index: -1; }
+.text-content { position: relative; z-index: 2; background-clip: text; -webkit-background-clip: text; color: transparent; }
+
+/* display:contents lets the supplied component provide one animated gradient to the whole site. */
+.animated-gradient-text.site-gradient { display: contents; max-width: none; }
+.site-gradient > .text-content { display: contents; }
+.site-gradient :where(h1, h2, h3, h4, p, a, button, span, small, strong, li, label, figcaption, dt, dd):not(.lower-page *) {
+  background-image: var(--gradient-image);
+  background-size: var(--gradient-size);
+  background-position: var(--gradient-position);
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.site-gradient :where(svg, svg *):not(.lower-page *) { color: var(--fg); }
+.site-gradient :where(img, video, canvas) { color: initial; background-clip: initial; -webkit-background-clip: initial; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-gradient :where(h1, h2, h3, h4, p, a, button, span, small, strong, li, label, figcaption, dt, dd):not(.lower-page *) { background-position: 50% 50%; }
+}

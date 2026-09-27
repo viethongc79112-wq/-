@@ -1,0 +1,72 @@
+{
+  "hope": {
+    "duration": 250.17,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/hope.jpg",
+    "src": "/media/videos/hope.mp4"
+  },
+  "future": {
+    "duration": 248.62,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/future.jpg",
+    "src": "/media/videos/future.mp4"
+  },
+  "six": {
+    "duration": 289.88,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/six.jpg",
+    "src": "/media/videos/six.mp4"
+  },
+  "door": {
+    "duration": 204.92000000000002,
+    "width": 1080,
+    "height": 1920,
+    "poster": "/media/posters/door.jpg",
+    "src": "/media/videos/door.mp4"
+  },
+  "hero": {
+    "duration": 19.85,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/hero.jpg",
+    "src": "/media/videos/hero.mp4"
+  },
+  "yunnan": {
+    "duration": 28.71,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/yunnan.jpg",
+    "src": "/media/videos/yunnan.mp4"
+  },
+  "shangrila": {
+    "duration": 23.87,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/shangrila.jpg",
+    "src": "/media/videos/shangrila.mp4"
+  },
+  "changguang": {
+    "duration": 173.57999999999998,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/changguang.jpg",
+    "src": "/media/videos/changguang.mp4"
+  },
+  "departure": {
+    "duration": 377.35,
+    "width": 1280,
+    "height": 720,
+    "poster": "/media/posters/departure.jpg",
+    "src": "/media/videos/departure.mp4"
+  },
+  "yiguo": {
+    "duration": 31.62,
+    "width": 1920,
+    "height": 1080,
+    "poster": "/media/posters/yiguo.jpg",
+    "src": "/media/videos/yiguo.mp4"
+  }
+}

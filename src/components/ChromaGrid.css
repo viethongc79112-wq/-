@@ -1,0 +1,36 @@
+.chroma-grid { --chroma-fade: 1; }
+.chroma-surface { position: relative; isolation: isolate; --chroma-x: -9999px; --chroma-y: -9999px; }
+.chroma-overlay, .chroma-fade, .chroma-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.chroma-overlay, .chroma-fade {
+  z-index: 2;
+  backdrop-filter: grayscale(1) brightness(.9);
+  -webkit-backdrop-filter: grayscale(1) brightness(.9);
+  background: rgb(0 0 0 / .001);
+}
+.chroma-overlay {
+  mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), transparent 15%, rgb(0 0 0 / .1) 30%, rgb(0 0 0 / .35) 60%, rgb(0 0 0 / .68) 88%, #000 100%);
+  -webkit-mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), transparent 15%, rgb(0 0 0 / .1) 30%, rgb(0 0 0 / .35) 60%, rgb(0 0 0 / .68) 88%, #000 100%);
+}
+.chroma-fade {
+  z-index: 3;
+  opacity: var(--chroma-fade);
+  mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), #000 15%, rgb(0 0 0 / .9) 30%, rgb(0 0 0 / .65) 60%, rgb(0 0 0 / .32) 88%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), #000 15%, rgb(0 0 0 / .9) 30%, rgb(0 0 0 / .65) 60%, rgb(0 0 0 / .32) 88%, transparent 100%);
+}
+.chroma-spotlight {
+  z-index: 4;
+  opacity: calc(1 - var(--chroma-fade));
+  box-shadow: inset 0 0 0 1px #b5d3ce70;
+  mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), #000, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle var(--chroma-radius) at var(--chroma-x) var(--chroma-y), #000, transparent 75%);
+}
+.chroma-surface[data-playing='true'] > :is(.chroma-overlay, .chroma-fade, .chroma-spotlight),
+.chroma-surface:focus-within > :is(.chroma-overlay, .chroma-fade, .chroma-spotlight) { visibility: hidden; }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .chroma-overlay, .chroma-fade, .chroma-spotlight { display: none; }
+}

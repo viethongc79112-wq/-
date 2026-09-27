@@ -1,0 +1,22 @@
+.neon-reveal-background {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #ffb6fa, #ee8efcbb 4%, transparent 20%),
+    radial-gradient(ellipse 90% 72% at 50% -24%, #ffcbff 0%, #f39bff 30%, #aa54d2 49%, #5b2d77 65%, #22162e 83%, transparent 100%),
+    linear-gradient(180deg, #271431, #101214 85%);
+}
+.neon-reveal-background > canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: .8;
+  mask-image: linear-gradient(180deg, #000, #0009 30%, #0003 50%, transparent 72%);
+}
+.hero .hero-gallery-glow { box-shadow: none; }

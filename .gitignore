@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.superpowers/
+.tmp-resume/
+.DS_Store
+public/media/videos/
+public/media/previews/
+tmp/
