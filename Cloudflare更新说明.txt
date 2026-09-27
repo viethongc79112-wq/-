@@ -1,0 +1,14 @@
+吴言网站 · B站视频版
+
+全部 10 部作品已接入 B站，播放需要联网。
+桌面“吴言网站-Cloudflare上传包.zip”为专用上传包，里面有网页、图片和样式，不包含本地视频。
+
+更新已有的 Cloudflare Pages 网站：
+1. 登录 Cloudflare，进入 Workers & Pages，打开现有 wuyan-3lo 项目。
+2. 若项目使用直接上传：选择创建部署，选择生产环境，上传桌面的 ZIP 压缩包并部署。
+3. 部署完成后打开 https://wuyan-3lo.pages.dev/ 检查视频。网址保持不变。
+4. 若项目使用 Git 集成：把更新后的源代码提交到绑定仓库，并将构建命令设为 pnpm run export:cloudflare，输出目录设为 output/cloudflare。
+
+重新生成上传目录：在源项目运行 pnpm run export:cloudflare。
+只上传生成的 output/cloudflare 内容。原本的 dist 文件夹保留了本地视频，不作为本次上传包。
+本次仅准备文件，尚未更新 Cloudflare 公网部署。

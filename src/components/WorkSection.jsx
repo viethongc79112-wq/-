@@ -3,6 +3,7 @@ import { formatDuration } from '../data/portfolio';
 import ChromaGrid from './ChromaGrid';
 import Particles from './Particles';
 import MoltenMetal from './MoltenMetal';
+import BilibiliPlayer, { BilibiliLink } from './BilibiliPlayer';
 import './WorkSection.css';
 
 function pauseOtherVideos(event) {
@@ -16,8 +17,9 @@ function WorkCard({ work, index }) {
   return <article className={`work-entry chroma-surface work-${work.id}${work.height > work.width ? ' work-entry-portrait' : ''}`} data-index={String(index + 1).padStart(2, '0')} data-playing={playing}>
     <div className="work-media">
       <div className={`work-video-frame ${work.height > work.width ? 'portrait-video' : ''}`}>
-        <video src={work.src} poster={work.poster} controls playsInline preload="none" onPlay={event => { pauseOtherVideos(event); setPlaying(true); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} aria-label={`${work.title}作品视频`} />
+        {work.bilibiliId ? <BilibiliPlayer work={work} /> : <video src={work.src} poster={work.poster} controls playsInline preload="none" onPlay={event => { pauseOtherVideos(event); setPlaying(true); }} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} aria-label={`${work.title}作品视频`} />}
       </div>
+      {work.bilibiliId ? <BilibiliLink work={work} /> : null}
     </div>
     <div className="project-notes">
       <span className="work-type">{work.type}{work.year ? ` / ${work.year}` : ''}</span>
