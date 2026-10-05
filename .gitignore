@@ -1,5 +1,6 @@
 node_modules/
 dist/
+output/
 .superpowers/
 .tmp-resume/
 .DS_Store

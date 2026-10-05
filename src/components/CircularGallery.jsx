@@ -1,5 +1,5 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import './CircularGallery.css';
 
@@ -480,12 +480,16 @@ class App {
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
     this.startY = e.touches ? e.touches[0].clientY : e.clientY;
-    if (e.cancelable && e.type === 'touchstart') e.preventDefault();
   }
   onTouchMove(e) {
     if (!this.isDown) return;
     const x = e.touches ? e.touches[0].clientX : e.clientX;
     const y = e.touches ? e.touches[0].clientY : e.clientY;
+    // Let vertical touch gestures scroll the page; horizontal gestures browse works.
+    if (e.touches && Math.abs(y - this.startY) > Math.abs(x - this.start)) {
+      this.isDown = false;
+      return;
+    }
     this.dragDistance = Math.max(this.dragDistance, Math.hypot(x - this.start, y - this.startY));
     if (this.dragDistance > 6) this.didDrag = true;
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
@@ -496,6 +500,10 @@ class App {
     if (!this.isDown) return;
     this.isDown = false;
     this.onCheck();
+  }
+  onTouchCancel() {
+    this.isDown = false;
+    this.didDrag = false;
   }
   findMediaAtPoint(event) {
     const rect = this.container.getBoundingClientRect();
@@ -564,6 +572,14 @@ class App {
         this.onCheckDebounce();
         break;
 
+      case 'Enter': {
+        e.preventDefault();
+        const rect = this.container.getBoundingClientRect();
+        const media = this.findMediaAtPoint({ clientX: rect.left + rect.width / 2, clientY: rect.top + rect.height / 2 });
+        if (media?.id) this.onItemClick?.(media.id);
+        break;
+      }
+
       default:
         break;
     }
@@ -608,6 +624,7 @@ class App {
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
+    this.boundOnTouchCancel = this.onTouchCancel.bind(this);
     this.boundOnClick = this.onClick.bind(this);
     this.boundOnKeyDown = this.onKeyDown.bind(this);
 
@@ -616,9 +633,10 @@ class App {
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
-    this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: false });
+    this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
     window.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
     window.addEventListener('touchend', this.boundOnTouchUp);
+    window.addEventListener('touchcancel', this.boundOnTouchCancel);
     this.container?.addEventListener('click', this.boundOnClick);
 
     this.container?.addEventListener('keydown', this.boundOnKeyDown);
@@ -633,10 +651,12 @@ class App {
     this.container.removeEventListener('touchstart', this.boundOnTouchDown);
     window.removeEventListener('touchmove', this.boundOnTouchMove);
     window.removeEventListener('touchend', this.boundOnTouchUp);
+    window.removeEventListener('touchcancel', this.boundOnTouchCancel);
     this.container?.removeEventListener('click', this.boundOnClick);
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
     }
+    this.gl?.getExtension('WEBGL_lose_context')?.loseContext();
 
     if (this.container) {
       this.container.removeEventListener('keydown', this.boundOnKeyDown);
@@ -656,10 +676,12 @@ export default function CircularGallery({
   onItemClick
 }) {
   const containerRef = useRef(null);
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
     if (!containerRef.current) return;
     let app;
     let isMounted = true;
+    setFailed(false);
     resolveFont(font, fontUrl).then(resolvedFont => {
       if (!isMounted || !containerRef.current) return;
       app = new App(containerRef.current, {
@@ -672,6 +694,8 @@ export default function CircularGallery({
         scrollEase,
         onItemClick
       });
+    }).catch(() => {
+      if (isMounted) setFailed(true);
     });
 
     return () => {
@@ -681,11 +705,13 @@ export default function CircularGallery({
   }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, onItemClick]);
   return (
     <div
-      className="circular-gallery"
+      className={`circular-gallery${failed ? ' circular-gallery-fallback' : ''}`}
       ref={containerRef}
       tabIndex={0}
       role="region"
-      aria-label={`作品画廊，共${items?.length || 0}部作品。可拖动、滚轮或使用左右方向键浏览。`}
-    />
+      aria-label={`作品画廊，共${items?.length || 0}部作品。可拖动、滚轮或使用左右方向键浏览，按回车打开作品。`}
+    >{failed ? items?.map(item => <button key={item.id || item.image} className="gallery-fallback-item" onClick={() => onItemClick?.(item.id)}>
+      <img src={item.image} alt="" loading="lazy" /><span>{item.text}</span>
+    </button>) : null}</div>
   );
 }

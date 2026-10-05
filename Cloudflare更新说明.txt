@@ -1,14 +1,17 @@
-吴言网站 · B站视频版
+吴言网站 · GitHub Desktop → Cloudflare Pages
 
-全部 10 部作品已接入 B站，播放需要联网。
-桌面“吴言网站-Cloudflare上传包.zip”为专用上传包，里面有网页、图片和样式，不包含本地视频。
+1. GitHub Desktop 选择桌面“吴言个人简历网站”对应的仓库。
+2. 勾选本次修改，填写摘要，Commit to main，再点击 Push origin。
+3. 到 GitHub 检查仓库根目录有 package.json、src、public、scripts，而不只是压缩包。
+4. 在 Cloudflare Pages 确认连接的是这个 GitHub 仓库，生产分支 main。
+5. 构建命令：pnpm run build
+   构建输出目录：dist
+   根目录：留空
+   框架：Vite（或 None）
+   Node.js：24（项目的 .node-version 已指定）
+   pnpm：11.19.0（package.json 已指定；后台环境变量可设 PNPM_VERSION=11.19.0）
+6. 等待部署成功，再打开项目的 pages.dev 地址检查。
 
-更新已有的 Cloudflare Pages 网站：
-1. 登录 Cloudflare，进入 Workers & Pages，打开现有 wuyan-3lo 项目。
-2. 若项目使用直接上传：选择创建部署，选择生产环境，上传桌面的 ZIP 压缩包并部署。
-3. 部署完成后打开 https://wuyan-3lo.pages.dev/ 检查视频。网址保持不变。
-4. 若项目使用 Git 集成：把更新后的源代码提交到绑定仓库，并将构建命令设为 pnpm run export:cloudflare，输出目录设为 output/cloudflare。
-
-重新生成上传目录：在源项目运行 pnpm run export:cloudflare。
-只上传生成的 output/cloudflare 内容。原本的 dist 文件夹保留了本地视频，不作为本次上传包。
-本次仅准备文件，尚未更新 Cloudflare 公网部署。
+全部 10 部作品使用 B站，需要联网。部署包自动排除本地视频，无需上传压缩包或原视频。
+若 Cloudflare 项目仍绑定之前删除或重建过的仓库，需要先确认 GitHub 连接有效。
+本次检查和修正已保存到本地；是否上线以 Cloudflare 部署结果为准。

@@ -1,9 +1,16 @@
 吴言个人简历网站
 
-双击「启动网站.command」即可在浏览器打开网站。
-关闭终端窗口后，本地网站会停止运行。
+直接使用：双击「启动网站.command」，会优先使用 Google Chrome 打开网站。
+网页已构建好，本地预览不需要安装 Node.js 或 pnpm。
+10 部作品都由 B站提供，请保持联网。
+请保留启动时的终端窗口；关闭终端或按 Control+C 后，本地网站会停止。
+不要单独双击 dist/index.html，请使用上述启动入口。
+
+对外部署：打开 GitHub Desktop，提交全部本次修改，再点击 Push origin。
+Cloudflare Pages 构建命令为 pnpm run build，输出目录为 dist，生产分支为 main。
+详细步骤见「Cloudflare更新说明.txt」。本地预览地址不能发给其他人长期访问。
 
 如果需要修改源代码：
-1. 进入 src 文件夹修改；
+1. 安装 Node.js 24 和 pnpm 11.19.0，运行 pnpm install 后修改 src；
 2. 在项目目录运行 pnpm run build；
 3. 再双击启动网站.command。

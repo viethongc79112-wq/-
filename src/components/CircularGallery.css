@@ -3,7 +3,7 @@
   height: 100%;
   overflow: hidden;
   cursor: grab;
-  touch-action: none;
+  touch-action: pan-y;
   user-select: none;
 }
 
@@ -15,3 +15,12 @@
   outline: 2px solid #fff;
   outline-offset: 4px;
 }
+
+.circular-gallery-fallback { display: flex; align-items: center; gap: 24px; padding: 24px; overflow-x: auto; touch-action: auto; scroll-snap-type: x mandatory; }
+.gallery-fallback-item { flex: 0 0 min(70vw, 440px); min-width: 0; scroll-snap-align: center; text-align: left; }
+.gallery-fallback-item img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 6px; }
+.gallery-fallback-item span { display: block; margin-top: 16px; font-size: 20px; }
+.gallery-fallback-item:focus-visible { outline: 2px solid #b5d3ce; outline-offset: 5px; }
+.hero-spiral-layout:has(.circular-gallery-fallback) .hero-spiral-copy { position: relative; inset: auto; padding: 24px var(--gutter); flex-direction: row; align-items: center; flex-wrap: wrap; }
+.hero-spiral-layout:has(.circular-gallery-fallback) .hero-spiral-copy p { max-width: none; }
+.hero-spiral-layout:has(.circular-gallery-fallback) .hero-spiral-frame { height: clamp(340px, 26vw, 440px); }

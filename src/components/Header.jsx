@@ -5,12 +5,25 @@ import { Arrow } from './Icons';
 export default function Header() {
   const [active, setActive] = useState('home');
   useEffect(() => {
-    const sections = navItems.map(([id]) => document.getElementById(id));
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
-    }, { rootMargin: '-15% 0px -60% 0px', threshold: 0 });
-    sections.forEach(section => section && observer.observe(section));
-    return () => observer.disconnect();
+    const sections = navItems.map(([id]) => document.getElementById(id)).filter(Boolean);
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      // The short contact footer cannot always reach the top of the viewport.
+      const atBottom = window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      const marker = Math.max(100, window.innerHeight * 0.25);
+      const section = atBottom ? sections.at(-1) : [...sections].reverse().find(item => item.getBoundingClientRect().top <= marker);
+      setActive(section?.id || 'home');
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
   }, []);
   return <header className="site-header"><div className="shell header-inner">
     <a className="wordmark" href="#home" aria-label="吴言，回到首页">吴言<span className="wordmark-dot" /></a>
