@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import WorkSection from './components/WorkSection';
 import About from './components/About';
+import Internship from './components/Internship';
 import Contact from './components/Contact';
 import VideoPlayer from './components/VideoPlayer';
 import LowerBackground from './components/background/LowerBackground';
@@ -27,6 +28,6 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
   return <GradientText className="site-gradient" colors={['#E9E4DA', '#B5D3CE', '#B7B5D9']} animationSpeed={16}>
-    <a className="skip-link" href="#video">跳至作品</a><Header /><main><Hero onPlay={setSelected} modalOpen={!!selected} /><WorkSection category="video" works={videoWorks} /><WorkSection category="aigc" works={aiWorks} /><div className="lower-page"><LowerBackground paused={!!selected} /><About /><Contact /></div></main>{selected ? <VideoPlayer key={selected.id} work={selected} onClose={() => setSelected(null)} /> : null}
+    <a className="skip-link" href="#video">跳至作品</a><Header /><main><Hero onPlay={setSelected} modalOpen={!!selected} /><WorkSection category="video" works={videoWorks} /><WorkSection category="aigc" works={aiWorks} /><div className="lower-page"><LowerBackground paused={!!selected} /><Internship /><About /><Contact /></div></main>{selected ? <VideoPlayer key={selected.id} work={selected} onClose={() => setSelected(null)} /> : null}
   </GradientText>;
 }

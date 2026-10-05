@@ -178,6 +178,7 @@ html, body { overflow-x: clip; }
 
 /* 后续内容区随屏幕展开，边缘仅保留阅读所需的留白。 */
 .work-content.shell,
+.internship-section.shell,
 .about-section.shell,
 .contact-section.shell {
   width: calc(100% - clamp(16px, 2vw, 48px) * 2);
@@ -192,48 +193,46 @@ html, body { overflow-x: clip; }
   .about-layout { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* 实习项目记录 */
-.internship-record {
-  margin-top: 30px;
-  padding: clamp(22px, 2.5vw, 36px);
-  border: 1px solid #b5d3ce24;
-  border-radius: 12px;
-  background: #1012148c;
+/* 实习项目独立成屏，继续沿用下半页背景。 */
+.internship-section {
+  min-height: 100svh;
+  padding-block: 64px 72px;
+  border-top: 1px solid var(--line);
 }
-.internship-record-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--line);
-}
-.internship-record-heading h3 { margin-top: 8px; font-size: clamp(22px, 2vw, 30px); }
-.internship-record-date { color: var(--muted); font: 14px/1.6 Consolas, monospace; white-space: nowrap; }
-.internship-group { padding-top: 24px; }
-.internship-group + .internship-group { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
-.internship-group-label { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; }
-.internship-group-label strong { font-size: 17px; font-weight: 500; }
-.internship-group-label span { color: var(--muted); font-size: 13px; }
-.internship-gallery { display: grid; gap: 12px; }
+.internship-section .section-heading { margin-bottom: 28px; }
+.internship-record-date { font: 16px/1.6 Consolas, monospace; white-space: nowrap; }
+.internship-overview { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px 24px; margin-bottom: 32px; }
+.internship-overview h3 { font-size: clamp(24px, 2vw, 32px); font-weight: 500; }
+.internship-overview p { font-size: 18px; line-height: 1.8; }
+.internship-group + .internship-group { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
+.internship-group-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 18px; }
+.internship-group-label strong { font-size: 24px; font-weight: 500; }
+.internship-group-label span { font-size: 17px; line-height: 1.7; }
+.internship-gallery { display: grid; gap: 20px; }
 .internship-gallery-wide { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.internship-gallery-portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }
+.internship-gallery-portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; }
 .internship-gallery figure { min-width: 0; }
-.internship-gallery img { display: block; width: 100%; height: 150px; object-fit: contain; border-radius: 6px; border: 1px solid #b5d3ce30; background: #080a0c; transition: transform .3s ease, border-color .3s ease; }
-.internship-gallery-portrait img { height: 220px; object-fit: contain; }
+.internship-gallery img { display: block; width: 100%; height: clamp(160px, 13vw, 240px); object-fit: contain; border-radius: 8px; border: 1px solid #b5d3ce30; background: #080a0c30; transition: transform .3s ease, border-color .3s ease; }
+.internship-gallery-portrait img { height: clamp(200px, 18vw, 280px); }
 .internship-gallery figure:hover img { transform: translateY(-3px); border-color: #b5d3ce88; }
-.internship-gallery figcaption { margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.internship-gallery figcaption { margin-top: 10px; font-size: 16px; line-height: 1.7; }
+.lower-page :where(.internship-record-date, .internship-overview p, .internship-group-label span, .internship-gallery figcaption) { color: var(--muted) !important; }
 @media (max-width: 760px) {
-  .internship-record { margin-top: 24px; padding: 18px 14px; }
-  .internship-record-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
-  .internship-record-heading h3 { font-size: 24px; }
-  .internship-record-date { font-size: 12px; }
-  .internship-group-label { align-items: flex-start; flex-direction: column; gap: 4px; margin-bottom: 12px; }
-  .internship-group-label strong { font-size: 17px; }
-  .internship-group-label span { font-size: 12px; }
-  .internship-gallery-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .internship-gallery img { height: 105px; }
-  .internship-gallery-portrait { gap: 10px; }
-  .internship-gallery-portrait img { height: 170px; }
-  .internship-gallery figcaption { font-size: 11px; }
+  .internship-section { padding-block: 46px 56px; }
+  .internship-record-date { font-size: 14px; }
+  .internship-overview { gap: 6px; margin-bottom: 26px; flex-direction: column; }
+  .internship-overview h3 { font-size: 23px; }
+  .internship-overview p { font-size: 16px; }
+  .internship-group-label { align-items: flex-start; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+  .internship-group-label strong { font-size: 22px; }
+  .internship-group-label span { font-size: 15px; }
+  .internship-gallery-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .internship-gallery { gap: 16px 12px; }
+  .internship-gallery img { height: auto; aspect-ratio: 4 / 3; }
+  .internship-gallery-portrait img { aspect-ratio: 3 / 4; }
+  .internship-gallery figcaption { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .internship-gallery img { transition: none; }
+  .internship-gallery figure:hover img { transform: none; }
 }

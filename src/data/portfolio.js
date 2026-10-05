@@ -26,7 +26,7 @@ export const byId = Object.fromEntries(works.map(work => [work.id, work]));
 const featuredIds = ['door', 'future', 'six', 'hope', 'yunnan', 'shangrila'];
 export const heroIds = [...featuredIds, ...works.filter(work => !featuredIds.includes(work.id)).map(work => work.id)];
 export const navItems = [
-  ['home', '首页'], ['video', '视频作品'], ['aigc', 'AIGC'], ['about', '关于我'], ['contact', '联系我'],
+  ['home', '首页'], ['video', '视频作品'], ['aigc', 'AIGC'], ['internship', '实习经历'], ['about', '关于我'], ['contact', '联系我'],
 ];
 export function formatDuration(seconds) {
   const total = Math.floor(seconds);

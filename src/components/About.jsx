@@ -2,7 +2,7 @@ import BorderGlow from './BorderGlow';
 
 export default function About() {
   return <section id="about" className="about-section shell" aria-labelledby="about-heading">
-    <div className="section-heading"><div className="section-title"><span className="section-number">03 /</span><h2 id="about-heading">关于我</h2></div><span className="about-place">安徽 · 芜湖</span></div>
+    <div className="section-heading"><div className="section-title"><span className="section-number">04 /</span><h2 id="about-heading">关于我</h2></div><span className="about-place">安徽 · 芜湖</span></div>
     <div className="about-layout"><BorderGlow className="about-photo-glow" backgroundColor="#141217" borderRadius={4} glowRadius={24} glowIntensity={0.64} edgeSensitivity={28} colors={['#a855f7', '#38bdf8', '#ec4899']} fillOpacity={0.16}>
       <figure className="working-photo"><img src="/media/photos/working.jpg" alt="吴言在海边逆光中手持相机拍摄" loading="lazy" /><figcaption><span>镜头之后</span><span>吴言 / 工作时刻</span></figcaption></figure>
     </BorderGlow>
@@ -15,19 +15,7 @@ export default function About() {
             <div><span className="fact-label">参赛作品</span><div><h3>《和合天下》· 导演、主制作、联合剪辑</h3><p>作品已完成，目前参赛中。</p></div></div>
             <div><span className="fact-label">代表荣誉</span><div><h3>第八届全国大学生数字编辑创新大赛 · 安徽赛区二等奖</h3><p>《遇见长广，育见希望》</p><h3>NCDA 未来设计师大赛 · 安徽赛区一等奖</h3><p>《转身即是出征》</p><h3>平遥国际摄影大展 · 入选作品</h3><p>《油菜梯田》· 2025</p><h3>安徽省大学生摄影大赛 · 三等奖</h3><p>2025</p></div></div>
           </div>
-          <div className="internship-record" aria-labelledby="internship-record-heading">
-            <div className="internship-record-heading"><div><span className="fact-label">实习项目记录</span><h3 id="internship-record-heading">从黄山徽艺小镇到鹏友圈</h3></div><span className="internship-record-date">2026.07 — 2026.10</span></div>
-            <div className="internship-group"><div className="internship-group-label"><strong>黄山徽艺小镇</strong><span>抖音号 / 视频号 · 拍摄与制作</span></div><div className="internship-gallery internship-gallery-wide">
-              <figure><img src="/media/internship/huangshan-01.webp" alt="黄山徽艺小镇抖音内容作品墙" loading="lazy" /><figcaption>内容栏目与节日选题</figcaption></figure>
-              <figure><img src="/media/internship/huangshan-02.webp" alt="黄山徽艺小镇抖音视频画面" loading="lazy" /><figcaption>景区内容拍摄</figcaption></figure>
-              <figure><img src="/media/internship/huangshan-03.webp" alt="黄山徽艺小镇视频号评论区" loading="lazy" /><figcaption>视频号内容运营</figcaption></figure>
-              <figure><img src="/media/internship/huangshan-04.webp" alt="黄山徽艺小镇旅居体验视频" loading="lazy" /><figcaption>旅居体验内容</figcaption></figure>
-            </div></div>
-            <div className="internship-group"><div className="internship-group-label"><strong>鹏友圈</strong><span>创始人 IP · 拍摄与剪辑</span></div><div className="internship-gallery internship-gallery-portrait">
-              <figure><img src="/media/internship/pengyouquan-01.webp" alt="鹏友圈创始人 IP 视频作品" loading="lazy" /><figcaption>人物访谈剪辑</figcaption></figure>
-              <figure><img src="/media/internship/pengyouquan-02.webp" alt="鹏友圈创始人 IP 视频作品" loading="lazy" /><figcaption>创始人 IP 内容</figcaption></figure>
-            </div></div>
-          </div>
+
         </div>
       </div>
   </section>;
